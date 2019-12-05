@@ -29,6 +29,12 @@ module Grokdown
           else
             new(**args)
           end
+        when Array
+          if self < Array
+            new(args)
+          else
+            new(*args)
+          end
         else
           new(*args)
         end
