@@ -22,6 +22,20 @@ module Grokdown
     end
 
     def push(node)
+      case node when Matching
+        _push(node)
+      when Array
+        node.each do |n|
+          _push(n)
+        end
+      else
+        _push(node)
+      end
+
+      self
+    end
+
+    private def _push(node)
       if accepts = @walk.reverse.find {|i| i.consumes?(node) }
         accepts.consume(node)
       else
@@ -29,8 +43,6 @@ module Grokdown
       end
 
       @walk.push(node)
-
-      self
     end
 
     attr_reader :nodes
