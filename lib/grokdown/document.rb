@@ -12,7 +12,7 @@ module Grokdown
       CommonMarker.render_doc(markdown,options,extensions).reduce(self) do |doc, node|
         decorated_node = case node
         when Matching
-          Matching.matches(node).from_node(node)
+          Matching.for(node).build(node)
         else
           NeverConsumes.new(node)
         end

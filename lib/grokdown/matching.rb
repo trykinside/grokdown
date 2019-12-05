@@ -7,7 +7,6 @@ module Grokdown
       @@knowns = []
 
       def extended(base)
-        base.send(:include,InstanceMethods)
         @@knowns.push(base)
       end
 
@@ -15,7 +14,7 @@ module Grokdown
         @@knowns.any? {|i| i.matches?(node)}
       end
 
-      def matching(node)
+      def for(node)
         @@knowns.find {|i| i.matches?(node)}
       end
 
@@ -30,8 +29,6 @@ module Grokdown
       node.is_a?(self) || (node.is_a?(CommonMarker::Node) && @matcher.call(node))
     end
 
-    module InstanceMethods
-      alias_method :===, :matches?
-    end
+    alias_method :===, :matches?
   end
 end

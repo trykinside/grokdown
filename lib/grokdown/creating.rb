@@ -14,7 +14,7 @@ module Grokdown
       @create = block
     end
 
-    def from_node(node)
+    def build(node)
       if @create
         args = begin
           @create.call(node)
