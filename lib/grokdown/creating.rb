@@ -20,7 +20,7 @@ module Grokdown
         args = begin
           @create.call(node)
         rescue NoMethodError => e
-          raise Error, "cannot find #{e.name} from #{node.to_commonmark.inspect} at #{node.sourcepos[:start_line]}"
+          raise Error, "cannot find #{e.name} from #{node.to_commonmark.inspect} at #{node.sourcepos[:start_line]} in #{self} create block"
         end
 
         _build(args) {|i| i.node=node }
